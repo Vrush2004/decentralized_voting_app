@@ -1,15 +1,17 @@
 import '../styles/globals.css';
 
-import App from 'next/app';
-
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
-
-// Add `getInitialProps` to your custom `App` component
-MyApp.getInitialProps = async (appContext) => {
-  const appProps = await App.getInitialProps(appContext);
-  return { ...appProps };
-};
+// INTERNAL IMPORT
+import {VotingProvider} from '../context/Voter';
+import NavBar from '../components/NavBar/NavBar';
+const MyApp = ({Component, pageProps}) => (
+  <VotingProvider>
+    <div>
+      <NavBar/>
+      <div>
+          <Component {...pageProps}/>;
+      </div>
+    </div>
+  </VotingProvider> 
+)
 
 export default MyApp;
