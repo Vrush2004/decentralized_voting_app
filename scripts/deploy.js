@@ -1,15 +1,17 @@
 const hre = require("hardhat");
 
 async function main() {
-    const Lock = await hre.ethers.getContractFactory("Lock");
-    const lock = await Lock.deploy();
+    const VotingContract = await hre.ethers.getContractFactory("VotingContract");
+    const votingContract = await VotingContract.deploy();
 
-    await lock.deployed();
-    console.log("Lock with 1 ETH deplyed to: ",lock.address);
+    // Wait until the contract is deployed
+    await votingContract.deployed();
+
+    // Log the contract address
+    console.log("VotingContract deployed to:", votingContract.address);
 }
 
 main().catch((error) => {
     console.error(error);
-    process.exitCode=1;
-})
-
+    process.exitCode = 1;
+});

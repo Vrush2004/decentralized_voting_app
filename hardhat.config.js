@@ -1,4 +1,3 @@
-const { network } = require("hardhat");
 
 require("@nomicfoundation/hardhat-toolbox");
 

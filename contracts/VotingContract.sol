@@ -1,11 +1,11 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import "@openzepplelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 
-contract Create{
-    using Counters for Counters.Counter
+contract VotingContract{
+    using Counters for Counters.Counter;
 
     Counters.Counter public _voterId;
     Counters.Counter public _candidateId;
@@ -16,17 +16,17 @@ contract Create{
     struct Candidate{
         uint256 candidateId;
         string age;
-        syring name;
+        string name;
         string image;
         uint256 voteCount;
-        address _address;
+        address candidateAddress; 
         string ipfs;
     }
 
     event CandidateCreate(
         uint256 indexed candidateId,
         string age,
-        syring name,
+        string name,
         string image,
         uint256 voteCount,
         address _address,
@@ -86,7 +86,7 @@ contract Create{
         candidate.candidateId = idNumber;
         candidate.image = _image;
         candidate.voteCount = 0;
-        candidate.address = _address;
+        candidate.candidateAddress = _address;
         candidate.ipfs = _ipfs;
 
         candidateAddress.push(_address);
@@ -99,7 +99,7 @@ contract Create{
             candidate.voteCount,
             _address,
             _ipfs
-        )
+        );
     }
 
     function getCandidate() public view returns (address[] memory){
@@ -118,7 +118,7 @@ contract Create{
             candidates[_address].image,
             candidates[_address].voteCount,
             candidates[_address].ipfs,
-            candidates[_address]._address
+            candidates[_address].candidateAddress
         );
     }
 
@@ -132,7 +132,7 @@ contract Create{
 
         Voter storage voter = voters[_address];
 
-        require(voter.voter_allowed == 0);
+        require(voter.voter_allowed == 0, "Voter already exists");
 
         voter.voter_allowed = 1;
         voter.voter_name = _name;
@@ -141,7 +141,7 @@ contract Create{
         voter.voter_voterId = idNumber;
         voter.voter_vote = 1000;
         voter.voter_voted = false;
-        voter.voter_ipfs = ipfs;
+        voter.voter_ipfs = _ipfs;
 
         votersAddress.push(_address);
 
@@ -154,7 +154,7 @@ contract Create{
             voter.voter_voted,
             voter.voter_vote,
             _ipfs
-        )
+        );
     }
 
     function vote(address _candidateAddress, uint256 _candidateVoteId) external {
@@ -183,7 +183,15 @@ contract Create{
             voters[_address].voter_address,
             voters[_address].voter_ipfs,
             voters[_address].voter_allowed,
-            voters[_address].voter_voted,
-        )
+            voters[_address].voter_voted
+        );
+    }
+
+    function getVotedVoterList() public view returns(address[] memory){
+        return votedVoters;
+    }
+
+    function getVoterList() public view returns (address[] memory){
+        return votersAddress;
     }
 }
