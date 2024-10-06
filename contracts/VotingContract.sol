@@ -87,6 +87,51 @@ contract Create{
         candidate.image = _image;
         candidate.voteCount = 0;
         candidate.address = _address;
+        candidate.ipfs = _ipfs;
+
+        candidateAddress.push(_address);
+
+        emit CandidateCreate(
+            idNumber,
+            _age,
+            _name,
+            _image,
+            candidate.voteCount,
+            _address,
+            _ipfs
+        )
+    }
+
+    function getCandidate() public view returns (address[] memory){
+        return candidateAddress;
     }
     
+    function getCandidateLength() public view returns (uint256){
+        return candidateAddress.length;
+    }
+
+    function getCandidateData(address _address) public view returns(string memory, string memory, uint256, string memory, uint256, string memory, address){
+        return(
+            candidates[_address].age,
+            candidates[_address].name,
+            candidates[_address].candidateId,
+            candidates[_address].image,
+            candidates[_address].voteCount,
+            candidates[_address].ipfs,
+            candidates[_address]._address
+        );
+    }
+
+    // VOTER SECTION 
+
+    function voterRight(address _address, string memory _name, string memory _image, string memory _ipfs) public{
+        require(votingOrganizer == msg.sender, "Only organizer can create voter");
+        _voterId.increment();
+
+        uint256 idNumber = _voterId.current();
+
+        Voter storage voter = voters[_address];
+        
+        require(voter.voter_allowed == 0);
+    }
 }
