@@ -47,8 +47,29 @@ export const VotingProvider = ({children}) => {
         }
     };
 
+    // CONNECT WALLET
+    const connectWallet = async() => {
+        if(!window.ethereum) return setError("Please install MetaMask");
+
+        const account = await window.ethereum.request({method:"eth_requestAccounts"});
+
+        setCurrentAccount(account[0])
+    }
+
+    // UPLOAD TO IPFS VOTER IMAGE
+    const uploadToIPFS = async(file)=>{
+        try {
+            const added = await client.add({content: file})
+
+            const url = `https://ipfs.infura.io/ipfs/${added.path}`
+            return url;
+        } catch (error) {
+            setError("Error Uploading file to IPFS")
+        }
+    }
+
     return(
-        <VotingContext.Provider value={{}}>
+        <VotingContext.Provider value={{votingTitle, checkIfWalletIsConnected, connectWallet, uploadToIPFS}}>
             {children}
         </VotingContext.Provider>
     )
