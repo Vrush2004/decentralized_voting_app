@@ -106,8 +106,20 @@ const allowedVoters = () => {
             <div className={Style.input__container}>
                 <input 
                   inputType="text" 
+                  title='Name' 
+                  placeholder='Voter Name' 
+                  handleClick={(e) => setFormInput({...formInput, name: e.target.value})}
+                />
+                <input 
+                  inputType="text" 
                   title='Address' 
                   placeholder='Voter Address' 
+                  handleClick={(e) => setFormInput({...formInput, name: e.target.value})}
+                />
+                <input 
+                  inputType="text" 
+                  title='Position' 
+                  placeholder='Voter Position' 
                   handleClick={(e) => setFormInput({...formInput, name: e.target.value})}
                 />
             </div>
