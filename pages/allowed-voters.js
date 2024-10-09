@@ -2,6 +2,7 @@ import React, {useState, useEffect, useCallback, useContext} from 'react';
 import { useRouter } from 'next/router';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
+import '../styles/allowedVoter.module.css';
 
 // INTERNAL IMPORT
 import { VotingContext } from '../context/Voter';
@@ -19,7 +20,7 @@ const allowedVoters = () => {
   });
 
   const router = useRouter();
-  const {uploadToIPFS} = useContext(VotingContext)
+  const {uploadToIPFS, createVoter} = useContext(VotingContext)
 
   // VOTERS IMAGE DROP
   const onDrop = useCallback(async(acceptedFill) => {
@@ -63,7 +64,7 @@ const allowedVoters = () => {
                       </p>
                       <p className={Style.sideInfo_para}>Contract Candidate</p>
                   </div>
-                  <div className={Style.car}>
+                  <div className={Style.card}>
                       {/* {voterArray.map((el,i) => (
                           <div key={i+1} className={Style.card_box}>
                               <div className={Style.image}>
@@ -94,7 +95,7 @@ const allowedVoters = () => {
                             <div className={Style.voter__container__box__div__info}>
                                 <p>Upload File: JPG, PNG, WEBM Max 10MB</p>
                                 <div className={Style.voter__container__box__div__image}>
-                                  <Image src={images.candidate} width={150} height={150} objectFit='contain' alt='File upload'/>
+                                  <Image src={images.upload} width={150} height={150} objectFit='contain' alt='File upload'/>
                                 </div>
                                 <p>Drag & Drop File</p>
                                 <p>or Browse Media on your device</p>
@@ -123,12 +124,20 @@ const allowedVoters = () => {
                     handleClick={(e) => setFormInput({...formInput, position: e.target.value})}
                 />
                 <div className={Style.Button}>
-                    <Button btnName="Authorized Voter" handleClick={() => {}}/>
+                    <Button btnName="Authorized Voter" handleClick={() => createVoter(formInput, fileUrl,router)}/>
                 </div>
             </div>
         </div>
 
         {/*  */}
+        <div className={Style.createdVoter}>
+            <div className={Style.createVoter__info}>
+                <Image src={images.creator} alt='user profile'/>
+                <p>Notice for user</p>
+                <p>Organizer <span>0x98765...</span></p>
+                <p>Only organizer of the voting contract can create voter and candidate for voting election</p>
+            </div>
+        </div>
     </div>
   )
 
