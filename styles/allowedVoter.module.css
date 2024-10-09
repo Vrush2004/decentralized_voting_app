@@ -51,3 +51,85 @@
     padding: .5rem;
     border-radius: .2rem;
 }
+.sideInfo_para{
+    background-color: #9a02ac;
+    padding: .5rem;
+    border-radius: .2rem;
+}
+.card{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+.card_box{
+    line-height: 1;
+    border: 1px solid #9a02ac;
+    padding: .2rem;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.35);
+    border-radius: .3rem;
+}
+.image img{
+    width: 100%;
+}
+
+/* User List */
+.createVoter__info{
+    background-color: #231E39;
+    border-radius: 25px;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.35);
+    color: #b3b8cd;
+    padding: 2rem;
+}
+
+.voter{
+    background-color: #231E39;
+    border-radius: 25px;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.35);
+    color: #b3b8cd;
+    padding: 2rem;
+}
+.voter__container__box{
+    text-align: center;
+    border: 1px dotted #9a02ac;
+    border-radius: 5px;
+}
+.voter__container__box p{
+    line-height: .5s;
+}
+
+/* Input */
+.input__container{
+    padding-top: 2rem;
+    width: 80%;
+    margin: 0 auto;
+}
+.Button{
+    text-align: end;
+}
+
+
+/* Media Query */
+@media screen and (max-width:45rem){
+    .createVoter{
+        width: 90%;
+        grid-template-columns: 1fr;
+    }
+    .voter{
+        width: 100%;
+        padding: 1rem;
+    }
+    .input__container{
+        width: 100%;
+    }
+    .voterInfo{
+        width: 12rem;
+        height: 12rem;
+        top: 2rem;
+        left: 0rem;
+        cursor: pointer;
+    }
+    .voterInfo_paragraph{
+        font-size: 12px;
+        height: 7.5rem;
+    }
+}
