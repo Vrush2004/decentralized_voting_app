@@ -93,12 +93,43 @@ export const VotingProvider = ({children}) => {
             router.push("/voterList")
 
         } catch (error) {
-            setError("Error is creating voter")
+            setError("Something wrong creating voter")
         }
     }
 
+    // Get voter data
+    const getAllVoterData = async()=>{
+        try {
+            const web3 = new Web3();
+            const connection = await web3.connect()
+            const provider = new ethers.providers.Web3Provider(connection)
+            const signer = provider.getSigner()
+            const contract = fetchContract(signer)
+
+            // voter list
+            const voterListData = await contract.getVoterList;
+            setVoterAddress(voterListData); 
+
+            voterListData.map(async(el) =>{
+                const singleVoterData = await contract.getVoterData(el);
+                pushCandidate.push(singleVoterData)
+            })
+
+            // voter length
+            const voterList = await contract.getVoterLength();
+            setVoterLength(voterList.toNumber());
+        } catch (error) {
+            setError("Something went wrong fetching data")
+        }
+        
+    }
+
+    // useEffect(() => {
+    //     getAllVoterData();
+    // }, [])
+
     return(
-        <VotingContext.Provider value={{votingTitle, checkIfWalletIsConnected, connectWallet, uploadToIPFS,createVoter}}>
+        <VotingContext.Provider value={{votingTitle, checkIfWalletIsConnected, connectWallet, uploadToIPFS,createVoter, getAllVoterData}}>
             {children}
         </VotingContext.Provider>
     )
