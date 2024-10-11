@@ -83,6 +83,60 @@ const candidateRegistration = () => {
               )
             }
         </div>
+        <div className={Style.voter}>
+            <div className={Style.voter__container}>
+                <h1>Create New Candidate</h1>
+                <div className={Style.voter__container__box}>
+                    <div className={Style.voter__container__box__div}>
+                        <div {...getRootProps()}>
+                            <input {...getInputProps()}/>
+
+                            <div className={Style.voter__container__box__div__info}>
+                                <p>Upload File: JPG, PNG, WEBM Max 10MB</p>
+                                <div className={Style.voter__container__box__div__image}>
+                                  <Image src={images.upload} width={150} height={150} objectFit='contain' alt='File upload'/>
+                                </div>
+                                <p>Drag & Drop File</p>
+                                <p>or Browse Media on your device</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={Style.input__container}>
+                <input 
+                    inputType="text" 
+                    title='Name' 
+                    placeholder='Candidate Name' 
+                    handleClick={(e) => setCandidateForm({...candidateForm, name: e.target.value})}
+                />
+                <input 
+                    inputType="text" 
+                    title='Address' 
+                    placeholder='Candidate Address' 
+                    handleClick={(e) => setCandidateForm({...candidateForm, address: e.target.value})}
+                />
+                <input 
+                    inputType="text" 
+                    title='Age' 
+                    placeholder='Candidate Age' 
+                    handleClick={(e) => setCandidateForm({...candidateForm, age: e.target.value})}
+                />
+                <div className={Style.Button}>
+                    <Button btnName="Authorized Candidate" handleClick={() => setCandidate(candidateForm, fileUrl,router)}/>
+                </div>
+            </div>
+        </div>
+
+        {/*  */}
+        <div className={Style.createdVoter}>
+            <div className={Style.createVoter__info}>
+                <Image src={images.creator} alt='user profile'/>
+                <p>Notice for user</p>
+                <p>Organizer <span>0x98765...</span></p>
+                <p>Only organizer of the voting contract can create voter and candidate for voting election</p>
+            </div>
+        </div>
     </div>
   )
 
