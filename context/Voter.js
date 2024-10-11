@@ -166,6 +166,32 @@ export const VotingProvider = ({children}) => {
         }
     }
 
+    // get candidate data
+    const getNewCandidate = async()=>{
+        try {
+            const web3 = new Web3();
+            const connection = await web3.connect()
+            const provider = new ethers.providers.Web3Provider(connection)
+            const signer = provider.getSigner()
+            const contract = fetchContract(signer)
+
+            // all candidate
+            const allCandidate = await contract.getCandidate();
+
+            allCandidate.map(async(el) =>{
+                const singleCandidateData = await contract.getCandidateData(el)
+                pushCandidate.push(singleCandidateData)
+                candidateIndex.push(singleCandidateData[2].toNumber())
+            })
+
+            // candidate length
+            const allCandidateLength = await contract.getCandidateLength()
+            setCandidateLength(allCandidateLength.toNumber())
+        } catch (error) {
+            
+        }
+    }
+
     return(
         <VotingContext.Provider 
             value={{
@@ -176,7 +202,15 @@ export const VotingProvider = ({children}) => {
                 createVoter, 
                 getAllVoterData, 
                 giveVote, 
-                setCandidate
+                setCandidate,
+                getNewCandidate,
+                error,
+                voterArray,
+                voterLength,
+                voterAddress,
+                currentAccount,
+                candidateLength,
+                candidateArray
             }}
         >
             {children}
