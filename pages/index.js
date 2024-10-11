@@ -9,10 +9,10 @@ import Card from '../components/Card/Card';
 import image from '../assets/candidate-1.png';
 
 const index = () => {
-  const {getNewCandidate, candidateArray, giveVote, checkIfWalletIsConnected, candidateLength, voterLength} = useContext(VotingContext)
+  const {getNewCandidate, candidateArray, giveVote, checkIfWalletIsConnected, candidateLength, voterLength, currentAccount} = useContext(VotingContext)
 
   useEffect(() =>{
-    // checkIfWalletIsConnected()
+    checkIfWalletIsConnected()
   })
   return (
     <div className={Style.home}>
@@ -26,8 +26,16 @@ const index = () => {
               <p>No Voter: <span>{voterLength}</span></p>
             </div>
           </div>
+
+          <div className={Style.winner_message}>
+            <small>
+              <Countdown date={Date.now() + 100000}/>
+            </small>
+          </div>
         </div>
       )}
+
+      <Card candidateArray={candidateArray} giveVote={giveVote}/>
     </div>
   )
 }
