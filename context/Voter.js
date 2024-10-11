@@ -68,6 +68,18 @@ export const VotingProvider = ({children}) => {
         }
     }
 
+    // UPLOAD TO IPFS Candidate IMAGE
+    const uploadToIPFSCandidate = async(file)=>{
+        try {
+            const added = await client.add({content: file})
+
+            const url = `https://ipfs.infura.io/ipfs/${added.path}`
+            return url;
+        } catch (error) {
+            setError("Error Uploading file to IPFS")
+        }
+    }
+
     // Create Voter
     const createVoter = async(formInput, fileUrl,router)=>{
         try {
@@ -210,7 +222,8 @@ export const VotingProvider = ({children}) => {
                 voterAddress,
                 currentAccount,
                 candidateLength,
-                candidateArray
+                candidateArray,
+                uploadToIPFSCandidate
             }}
         >
             {children}
