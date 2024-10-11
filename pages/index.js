@@ -9,10 +9,25 @@ import Card from '../components/Card/Card';
 import image from '../assets/candidate-1.png';
 
 const index = () => {
-  const {votingTitle} = useContext(VotingContext)
+  const {getNewCandidate, candidateArray, giveVote, checkIfWalletIsConnected, candidateLength, voterLength} = useContext(VotingContext)
+
+  useEffect(() =>{
+    // checkIfWalletIsConnected()
+  })
   return (
-    <div>
-      {votingTitle}
+    <div className={Style.home}>
+      {currentAccount && (
+        <div className={Style.winner}>
+          <div className={Style.winner_info}>
+            <div className={Style.candidate_list}>
+              <p>No Candidate: <span>{candidateLength}</span></p>
+            </div>
+            <div className={Style.candidate_list}>
+              <p>No Voter: <span>{voterLength}</span></p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

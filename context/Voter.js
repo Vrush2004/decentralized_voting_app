@@ -124,7 +124,7 @@ export const VotingProvider = ({children}) => {
 
             voterListData.map(async(el) =>{
                 const singleVoterData = await contract.getVoterData(el);
-                pushCandidate.push(singleVoterData)
+                pushVoter.push(singleVoterData)
             })
 
             // voter length
@@ -203,6 +203,10 @@ export const VotingProvider = ({children}) => {
             
         }
     }
+
+    useEffect(() => {
+        getNewCandidate()
+    }, [])
 
     return(
         <VotingContext.Provider 

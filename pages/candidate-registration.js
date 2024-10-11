@@ -20,7 +20,7 @@ const candidateRegistration = () => {
   });
 
   const router = useRouter();
-  const { setCandidate, uploadToIPFSCandidate} = useContext(VotingContext)
+  const { setCandidate, uploadToIPFSCandidate, candidateArray, getNewCandidate} = useContext(VotingContext)
 
   // VOTERS IMAGE DROP
   const onDrop = useCallback(async(acceptedFill) => {
@@ -33,6 +33,10 @@ const candidateRegistration = () => {
     accept: "image/*",
     maxSize: 5000000,
   })
+
+  useEffect(()=> {
+    getNewCandidate();
+  }, [])
 
   // JSX PART
   return (
@@ -65,19 +69,19 @@ const candidateRegistration = () => {
                       <p className={Style.sideInfo_para}>Contract Candidate</p>
                   </div>
                   <div className={Style.card}>
-                      {/* {voterArray.map((el,i) => (
+                      {candidateArray.map((el,i) => (
                           <div key={i+1} className={Style.card_box}>
                               <div className={Style.image}>
-                                <img src="" alt="Profile photo" />
+                                <img src={al[3]} alt="Profile photo" />
                               </div>
 
                               <div className={Style.card_info}>
-                                <p>Name</p>
-                                <p>Address</p>
-                                <p>Details</p>
+                                <p>{el[1]} #{el[2].toNumber()}</p>
+                                <p>{el[0]}</p>
+                                <p>Address: {el[6].slice(0,10)}..</p>
                               </div>
                           </div>
-                      ))} */}
+                      ))}
                   </div>
                 </div>
               )
