@@ -1,0 +1,25 @@
+.navbar{
+    width: 100%;
+    height: 5.5rem;
+    background-color: #231e39;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+    margin-bottom: 2rem;
+}
+.title{
+    cursor: pointer;
+}
+.navbar_box{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+}
+.connect{
+    background-color: #9a02ac;
+    padding: .5rem 2rem;
+    border-radius: .2rem;
+    cursor: pointer;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+}
