@@ -143,7 +143,15 @@ export const VotingProvider = ({children}) => {
     // Give vote
     const giveVote = async(id) => {
         try {
-            
+            const voterAddress = id.address;
+            const voterId = id.id;
+            const web3 = new Web3();
+            const connection = await web3.connect()
+            const provider = new ethers.providers.Web3Provider(connection)
+            const signer = provider.getSigner()
+            const contract = fetchContract(signer)
+
+            const voteredList = await contract.vote(voterAddress)
         } catch (error) {
             
         }
