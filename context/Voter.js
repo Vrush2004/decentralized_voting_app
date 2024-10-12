@@ -38,7 +38,7 @@ export const VotingProvider = ({children}) => {
     const checkIfWalletIsConnected = async()=>{
         if(!window.ethereum) return setError("Please install MetaMask");
 
-        const account = await window.ethereum.request({method:"eth_account"});
+        const account = await window.ethereum.request({method:"eth_accounts"});
 
         if (account.length){
             setCurrentAccount(account[0]);
@@ -91,7 +91,7 @@ export const VotingProvider = ({children}) => {
             // Connecting smart contract
             const web3 = new Web3();
             const connection = await web3.connect()
-            const provider = new ethers.providers.Web3Provider(connection)
+            const provider = new ethers.providers.JsonRpcProvider(connection);
             const signer = provider.getSigner()
             const contract = fetchContract(signer)
             const data = JSON.stringify({name, address, position, image: fileUrl})
@@ -114,7 +114,7 @@ export const VotingProvider = ({children}) => {
         try {
             const web3 = new Web3();
             const connection = await web3.connect()
-            const provider = new ethers.providers.Web3Provider(connection)
+            const provider = new ethers.providers.JsonRpcProvider(connection);
             const signer = provider.getSigner()
             const contract = fetchContract(signer)
 
@@ -147,7 +147,7 @@ export const VotingProvider = ({children}) => {
             const voterId = id.id;
             const web3 = new Web3();
             const connection = await web3.connect()
-            const provider = new ethers.providers.Web3Provider(connection)
+            const provider = new ethers.providers.JsonRpcProvider(connection);
             const signer = provider.getSigner()
             const contract = fetchContract(signer)
 
@@ -168,7 +168,7 @@ export const VotingProvider = ({children}) => {
             // Connecting smart contract
             const web3 = new Web3();
             const connection = await web3.connect()
-            const provider = new ethers.providers.Web3Provider(connection)
+            const provider = new ethers.providers.JsonRpcProvider(connection);
             const signer = provider.getSigner()
             const contract = fetchContract(signer)
             const data = JSON.stringify({name, address, image: fileUrl, age})
@@ -191,7 +191,7 @@ export const VotingProvider = ({children}) => {
         try {
             const web3 = new Web3();
             const connection = await web3.connect()
-            const provider = new ethers.providers.Web3Provider(connection)
+            const provider = new ethers.providers.JsonRpcProvider(connection);
             const signer = provider.getSigner()
             const contract = fetchContract(signer)
 
